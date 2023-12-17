@@ -9,8 +9,8 @@ class ProductController extends Controller
 {
     function products()
     {
-        // $products = Product::paginate(5);
-        $products = DB::table("products")->get();
+        // Fetch paginated data from the 'products' table
+        $products = DB::table('products')->paginate(10);
 
         return view('pages.products', [
             'products' => $products
@@ -115,12 +115,18 @@ class ProductController extends Controller
 
     function transections()
     {
+        // Specify the number of records per page
+        $perPage = 3;
 
+        // Fetch paginated data from the 'transactions' table
+        $transactions = DB::table('transactions')->paginate($perPage);
+
+        return view('pages.transections', compact('transactions'));
         //return view('pages.transections', compact('transactions'));
-        $transactions = DB::table("transactions")->get();
+        // $transactions = DB::table("transactions")->get();
 
-        return view('pages.transections', [
-            'transactions' => $transactions
-        ]);
+        // return view('pages.transections', [
+        //     'transactions' => $transactions
+        // ]);
     }
 }
