@@ -37,7 +37,7 @@
                                 @foreach ($transactions as $transaction)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td class="px-6 py-4">{{ $transaction->id }}</td>
-                                        <td class="px-6 py-4">{{ $transaction->product_id}}</td>
+                                        <td class="px-6 py-4">{{ $transaction->product_name}}</td>
                                         <td class="px-6 py-4">{{ $transaction->quantity }}</td>
                                         <td class="px-6 py-4">{{ $transaction->unit_price }}</td>
                                         <td class="px-6 py-4">{{ $transaction->total_price }}</td>

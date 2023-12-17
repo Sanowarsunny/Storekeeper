@@ -87,13 +87,22 @@ class ProductController extends Controller
 
             // Insert data into the transactions table
             DB::table('transactions')->insert([
-                'product_id' => $product->id,
+                //'product_id' => $product->id,
+                'product_name' => $product->product_name,
                 'quantity' => $request->input('quantity'),
                 'unit_price' => $product->price,
                 'total_price' => $totalPrice,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Update product quantity
+            DB::table('products')
+                ->where('id', $product->id)
+                ->update([
+                    'quantity' => $product->quantity - $request->input('quantity'),
+                    'updated_at' => now(),
+                ]);
 
             // Redirect or return a response
             return redirect()->route('pages.sale');
