@@ -18,3 +18,7 @@ generate env key
 ```
 php artisan key:generate
 ```
+and serve in browser
+```
+php artisan serve
+```
