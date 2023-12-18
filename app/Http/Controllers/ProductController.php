@@ -58,75 +58,74 @@ class ProductController extends Controller
     }
 
 
-    function sale()
-    {
-        $products = DB::table("products")->get();
+    // function sale()
+    // {
+    //     $products = DB::table("products")->get();
 
-        return view('pages.productSale', [
-            'products' => $products
-        ]);
-    }
-    function saleStore(Request $request)
-    {
+    //     return view('pages.productSale', [
+    //         'products' => $products
+    //     ]);
+    // }
+    // function saleStore(Request $request)
+    // {
 
-        // DB::table('sales')->insert([
-        //     'product_name' => $request->input('product'),
-        //     'quantity' => $request->input('quantity')          
-        // ]);
-        // return redirect()->route('pages.sale');
-
-
-
-        // Get product information from the products table
-        $product = DB::table('products')->where('id', $request->input('product_id'))->first();
-
-        // Check if the product exists
-        if ($product) {
-            // Calculate total price
-            $totalPrice = $product->price * $request->input('quantity');
-
-            // Insert data into the transactions table
-            DB::table('transactions')->insert([
-                //'product_id' => $product->id,
-                'product_name' => $product->product_name,
-                'quantity' => $request->input('quantity'),
-                'unit_price' => $product->price,
-                'total_price' => $totalPrice,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
-            // Update product quantity
-            DB::table('products')
-                ->where('id', $product->id)
-                ->update([
-                    'quantity' => $product->quantity - $request->input('quantity'),
-                    'updated_at' => now(),
-                ]);
-
-            // Redirect or return a response
-            return redirect()->route('pages.sale');
-        } else {
-            // Handle the case where the product is not found
-            return redirect()->route('pages.sale');
-        }
-    }
+    //     // DB::table('sales')->insert([
+    //     //     'product_name' => $request->input('product'),
+    //     //     'quantity' => $request->input('quantity')          
+    //     // ]);
+    //     // return redirect()->route('pages.sale');
 
 
-    function transections()
-    {
-        // Specify the number of records per page
-        $perPage = 3;
 
-        // Fetch paginated data from the 'transactions' table
-        $transactions = DB::table('transactions')->paginate($perPage);
+    //     // Get product information from the products table
+    //     $product = DB::table('products')->where('id', $request->input('product_id'))->first();
 
-        return view('pages.transections', compact('transactions'));
-        //return view('pages.transections', compact('transactions'));
-        // $transactions = DB::table("transactions")->get();
+    //     // Check if the product exists
+    //     if ($product) {
+    //         // Calculate total price
+    //         $totalPrice = $product->price * $request->input('quantity');
 
-        // return view('pages.transections', [
-        //     'transactions' => $transactions
-        // ]);
-    }
+    //         // Insert data into the transactions table
+    //         DB::table('transactions')->insert([
+    //             //'product_id' => $product->id,
+    //             'product_name' => $product->product_name,
+    //             'quantity' => $request->input('quantity'),
+    //             'unit_price' => $product->price,
+    //             'total_price' => $totalPrice,
+    //             'created_at' => now(),
+    //             'updated_at' => now(),
+    //         ]);
+
+    //         // Update product quantity
+    //         DB::table('products')
+    //             ->where('id', $product->id)
+    //             ->update([
+    //                 'quantity' => $product->quantity - $request->input('quantity'),
+    //                 'updated_at' => now(),
+    //             ]);
+
+    //         // Redirect or return a response
+    //         return redirect()->route('pages.sale');
+    //     } else {
+    //         // Handle the case where the product is not found
+    //         return redirect()->route('pages.sale');
+    //     }
+    // }
+
+    // function transections()
+    // {
+    //     // Specify the number of records per page
+    //     $perPage = 10;
+
+    //     // Fetch paginated data from the 'transactions' table
+    //     $transactions = DB::table('transactions')->paginate($perPage);
+
+    //     return view('pages.transections', compact('transactions'));
+    //     //return view('pages.transections', compact('transactions'));
+    //     // $transactions = DB::table("transactions")->get();
+
+    //     // return view('pages.transections', [
+    //     //     'transactions' => $transactions
+    //     // ]);
+    // }
 }
