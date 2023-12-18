@@ -10,13 +10,18 @@ install js dependencies
 ```
 npm install && npm run dev
 ````
-create .env file
+create .env file and also check your database name 
 ```
 cp (unix) or copy (Windows) .env.example .env
 ```
 generate env key
 ```
 php artisan key:generate
+
+```
+need migration for create table create 
+```
+php artisan migrate
 ```
 and serve in browser
 ```
