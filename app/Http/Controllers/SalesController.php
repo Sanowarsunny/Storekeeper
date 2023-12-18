@@ -16,6 +16,14 @@ class SalesController extends Controller
             'products' => $products
         ]);
     }
+    public function getProductQuantity($productId)
+    {
+        // Retrieve the quantity of the selected product
+        $product = DB::table('products')->where('id', $productId)->first();
+
+        // Return the quantity as a JSON response
+        return response()->json(['quantity' => $product->quantity]);
+    }
     function saleStore(Request $request)
     {
 
